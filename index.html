@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+            height: 600px;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        input[type=text],
+        select {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 50%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center><h1>Polymorphism</h1></center>
+
+    <div class="row">
+        <div class="column" style="background-color:#aaa;">
+            <center>
+                <h2>Input</h2>
+                <input type="text" id="fname" name="firstname" placeholder="Space separated input">
+                <input type="submit" value="Submit">
+                <input type="submit" value="Next">
+                <input type="submit" value="previous">
+                <input type="submit" value="Reset">
+            </center>
+        </div>
+        <div class="column" style="background-color:#bbb;">
+            <center>
+                <h2>Step by Step logic</h2>
+                <!-- <div>program</div>   -->
+            </center>
+            
+        </div>
+        <div class="column" style="background-color:#ccc;">
+            <center>
+                <h2>Output</h2>
+                <!-- <div>Output</div> -->
+            </center>
+            
+        </div>
+    </div>
+
+</body>
+
+</html>
