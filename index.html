@@ -3,7 +3,6 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <script src="simulate.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -35,7 +34,7 @@
             box-sizing: border-box;
         }
 
-        input[type=submit] {
+        input[type=button] {
             width: 50%;
             background-color: #4CAF50;
             color: white;
@@ -46,7 +45,7 @@
             cursor: pointer;
         }
 
-        input[type=submit]:hover {
+        input[type=button]:hover {
             background-color: #45a049;
         }
 
@@ -56,6 +55,7 @@
             }
         }
     </style>
+    
 </head>
 
 <body>
@@ -71,10 +71,10 @@
                 <input type="text" id="input" name="input" placeholder="Space separated input">
                 <img src="icon.png" width="12"
                     title="Enter a random number for calculating area of figure with Min 1 input and Max 3 space seperated inputs"><br>
-                <input type="submit" value="Submit">
-                <input type="submit" value="Next">
-                <input type="submit" value="previous">
-                <input type="submit" value="Reset">
+                <input type="button" value="Submit" id="submit">
+                <input type="button" value="Next" id="next" >
+                <input type="button" value="previous" id="prev" >
+                <input type="button" value="Reset" id="reset">
             </center>
         </div>
         <div class="column" id="logic">
