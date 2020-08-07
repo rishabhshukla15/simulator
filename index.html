@@ -10,11 +10,13 @@
 
         .column {
             float: left;
-            width: 33.33%;
+            width: 33%;
             padding: 10px;
             height: 600px;
             border: thick solid #000000;
+            margin: 1px;
         }
+
         .row:after {
             content: "";
             display: table;
@@ -27,7 +29,7 @@
             padding: 12px 20px;
             margin: 8px 0;
             display: inline-block;
-            border: 1px solid #ccc;
+            border: 1px solid #000000;
             border-radius: 4px;
             box-sizing: border-box;
         }
@@ -46,24 +48,28 @@
         input[type=submit]:hover {
             background-color: #45a049;
         }
+
         @media screen and (max-width: 600px) {
-       .column {
-        width: 100%;
-         }
+            .column {
+                width: 100%;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <center><h1>Polymorphism</h1></center>
+    <center>
+        <h1>Polymorphism</h1>
+    </center>
 
     <div class="row">
         <div class="column">
             <center>
-                <h2>Input</h2>
+                <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;">Input</h2>
                 <input type="text" id="input" name="input" placeholder="Space separated input">
-                <img src="icon.png" width="12" title="Enter a random number for calculating area of figure with Min 1 input and Max 3 space seperated inputs"><br>
+                <img src="icon.png" width="12"
+                    title="Enter a random number for calculating area of figure with Min 1 input and Max 3 space seperated inputs"><br>
                 <input type="submit" value="Submit">
                 <input type="submit" value="Next">
                 <input type="submit" value="previous">
@@ -72,18 +78,18 @@
         </div>
         <div class="column">
             <center>
-                <h2>Step by Step logic</h2>
+                <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;">Step by Step logic</h2>
                 <!-- <div>program</div>   -->
             </center>
-            
+
         </div>
         <div class="column">
             <center>
-                <h2>Output</h2>
+                <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;">Output</h2>
                 <input type="text" id="output" name="output" placeholder="Output">
                 <!-- <div>Output</div> -->
             </center>
-            
+
         </div>
     </div>
 
