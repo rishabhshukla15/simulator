@@ -68,9 +68,10 @@
         <div class="column" id="input">
             <center>
                 <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;border: 3px solid #000000 ;">Input</h2>
-                <input type="text" id="input" name="input" placeholder="Space separated input">
+                <form id="form1" onsubmit="return false;"><input type="text" id="input" name="input" placeholder="Space separated input">
                 <img src="icon.png" width="12"
                     title="Enter a random number for calculating area of figure with Min 1 input and Max 3 space seperated inputs"><br>
+		</form>
                 <input type="button" value="Submit" id="submit">
                 <input type="button" value="Next" id="next" >
                 <input type="button" value="previous" id="prev" >
@@ -119,7 +120,7 @@
         document.getElementById('prev').style.backgroundColor='grey';
         document.getElementById('submit').disabled=false;
         document.getElementById('submit').style.backgroundColor='#4CAF50';
-        document.getElementById('input').value='';
+        document.getElementById('form1').reset();
     };
 </script>
 </html>
