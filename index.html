@@ -10,11 +10,18 @@
 
         .column {
             float: left;
-            width: 33%;
+            width: 28%;
             padding: 10px;
             height: 600px;
             border: thick solid #000000;
             margin: 1px;
+        }
+        .col2{
+                width: 50%;
+        }
+
+        .col3{
+            width: 20%
         }
 
         .row:after {
@@ -53,7 +60,8 @@
             .column {
                 width: 100%;
             }
-        }	
+        }
+	
     </style>
     
 </head>
@@ -69,7 +77,7 @@
             <center>
                 <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;border: 3px solid #000000 ;">Input</h2>
                 <form id="form1" onsubmit="return false;"><input type="text" id="inputa" name="inputa" placeholder="Space separated input">
-                <img src="icon.png" width="12"
+                <img src="images/icon.png" width="12"
                     title="Enter a random number for calculating area of figure with Min 1 input and Max 3 space seperated inputs"><br>
 		</form>
                 <input type="button" value="Submit" id="submit">
@@ -78,19 +86,21 @@
                 <input type="button" value="Reset" id="reset">
             </center>
         </div>
-        <div class="column" id="logic">
+        <div class="column col2" id="logic">
             <center>
                 <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;border: 3px solid #000000 ;">Step by Step logic</h2>
                 <!-- <div>program</div>   -->
                 <span style="display: none;"><h3>Press Next to proceed</h3></span>
-		<img src="" id="myImage" width="100%" height="100%"/>
+		<img src="images/input.jpg" id="myImage" width="101%" height="102%"/>
             </center>
 
         </div>
-        <div class="column" id="output">
+        <div class="column col3" id="output">
             <center>
                 <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;border: 3px solid #000000 ;">Output</h2>
-                <input type="text" id="output" name="output" placeholder="Output">
+                <textarea id='outputa' name='output' placeholder="Output" rows="3" cols="20">
+
+                </textarea>
                 <!-- <div>Output</div> -->
             </center>
 
@@ -112,7 +122,7 @@
         document.getElementById('prev').style.backgroundColor='#4CAF50';
         document.getElementById('submit').disabled=true;
         document.getElementById('submit').style.backgroundColor='grey';
-	setshape();
+	    setshape();
     };
     document.getElementById('reset').onclick=function(){
         document.getElementById('next').disabled= true;
@@ -121,28 +131,52 @@
         document.getElementById('prev').style.backgroundColor='grey';
         document.getElementById('submit').disabled=false;
         document.getElementById('submit').style.backgroundColor='#4CAF50';
-        document.getElementById('form1').reset();
+        document.getElementById('form1').reset();     
+        document.getElementById('outputa').value='';
+        count=-1;
+        var image = document.getElementById('myImage');
+        image.src='images/input.jpg';
     };
 </script>
 <script>
 var flag=-1;
 var count=-1;
-var circle=["Slide1.PNG","Slide2.jpg","Slide3.jpg","Slide6.jpg","Slide9.jpg","Slide10.jpg"];
-var rectangle=["Slide1.PNG","Slide2.jpg","Slide4.jpg","Slide7.jpg","Slide9.jpg","Slide11.jpg"];
-var triangle=["Slide1.PNG","Slide2.jpg","Slide5.jpg","Slide8.jpg","Slide9.jpg","Slide12.jpg"];
-var directory="simulator_code/";
+var circle=["Slide1.png","Slide2.jpg","Slide3.jpg","Slide6.jpg","Slide9.jpg","Slide10.jpg"];
+var rectangle=["Slide1.png","Slide2.jpg","Slide4.jpg","Slide7.jpg","Slide9.jpg","Slide11.jpg"];
+var triangle=["Slide1.png","Slide2.jpg","Slide5.jpg","Slide8.jpg","Slide9.jpg","Slide12.jpg"];
+var directory="images/";
+var area=0;
 
 function setshape(){
 	var str=document.getElementById("inputa").value;
 	var array = str.split(" ");
 	if(array.length>3 || str.trim()==""){
-		alert("Invalid Number of Parameters");
+		alert("Invalid Number of Parameters"); 
+        document.getElementById('reset').click();
 	}
 	else{
 		flag=array.length;
 		count=-1;
+        if (array.length==1) {
+            area=3.14*array[0]*array[0];
+            console.log(area);
+            
+        }
+        else if (array.length==2) {
+            area=array[0]*array[1];
+            console.log(area);
+        }
+        else if(array.length==3){
+            s=parseInt(array[0])+parseInt(array[1])+parseInt(array[2]);
+            s=s/2;                  
+            area=Math.sqrt(s*(s-array[0])*(s-array[1])*(s-array[2]));
+            console.log(area);
+        }
+        var image = document.getElementById('myImage');
+        image.src='images/default.jpg';
 	}
-	
+	//console.log(area);
+    
 }
 
 function init(){
@@ -153,11 +187,19 @@ function init(){
 function next(){
 	if(flag!=-1){
 		count=count+1;
-		if(count==6){
-			count=0;
-		}
+		if(count>6){
+            count-=1;
+            console.log(count);
+            
+        }
 		var image = document.getElementById('myImage');
-		if(flag==1){
+        if(count==6){
+            console.log(count);            
+            image.src = directory+'full_code.jpg';                        
+            document.getElementById('outputa').value=area;            
+		}
+        else{
+            if(flag==1){            
 			image.src = directory+circle[count];
 		}
 		if(flag==2){
@@ -166,6 +208,8 @@ function next(){
 		if(flag==3){
 			image.src = directory+triangle[count];
 		}
+        }        
+		
 	}
 }
 
@@ -173,7 +217,7 @@ function prev(){
 	if(flag!=-1){
 		count=count-1;
 		if(count==-1){
-			count=5;
+			count=0;
 		}
 		var image = document.getElementById('myImage');
 		if(flag==1){
