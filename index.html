@@ -1,235 +1,558 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        .column {
-            float: left;
-            width: 28%;
-            padding: 10px;
-            height: 550px;
-            border: thick solid #000000;
-            margin: 1px;
-        }
-        .col2{
-                width: 50%;
-        }
-
-        .col3{
-            width: 20%
-        }
-
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        input[type=text],
-        select {
-            width: 50%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #000000;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        input[type=button] {
-            width: 50%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type=button]:hover {
-            background-color: #45a049;
-        }
-
-        @media screen and (max-width: 600px) {
-            .column {
-                width: 100%;
-            }
-        }
-	
-    </style>
-    
+    <title>
+        RSA-Cryptography
+    </title>    
 </head>
+<style>
+    .option {
+        background-color:  rgba(225, 225, 225,0.8);
+        width: 300px;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        border-radius: 100px;
+        border: 2px solid transparent;
+    }
+    .option:hover{
+    cursor: pointer;
+    border: 2px solid rgb(39, 38, 38);
+    color: rgb(39, 38, 38);
+}
+    .option:focus{
+        outline: none;
+    }
+    .btn-next{
+    background-color: rgb(39, 38, 38);
+    color: white ;
+    padding:15px 35px;
+    border: none;
+    border-radius: 27px;
+    transition: 0.4s all;
+}
+.btn-next:hover{
+    cursor: pointer;
+    background-color:white;
+    color: rgb(39, 38, 38);
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.3);
+    transform: translateY(-5px);
+}
+.simulator,.instruction{
+    /*background-color: rgba(225, 225, 225,0.5);*/
+    text-shadow: 0px 1px 1px rgb(34, 34, 34);
+    border-radius: 40px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body {
+  /*background-image: url('pex.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;*/
+}
+.float{
+    background-color:  rgba(225, 225, 225,0.8);
+    border-radius: 20px;
+}
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  float: right;
+  bottom: 30;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+
+</style>
 
 <body>
+    <div class="instruction">                
+                <h1>Instructions</h1>
+                <ul>
+                    <li>Enter two different large prime numbers as P and Q.</li>
+                    <li>P and Q should be between 11 and 100.</li>
+                    <li>Value of e differs according to the given inputs.</li>
+                    <li>Message to be sent should be a numeric message containing only numbers (0-9).</li>
+                </ul>
+                <div class="popup" onclick="myFunction()" id="myBtn"><b style="color: crimson"><span id="click">Click to see formulae</span></b>
+                        <span class="popuptext" id="myPopup">Formulae box</span>
+                </div>        
+        
+    </div>
+    <div id="myModal" class="modal">
 
-    <center>
-        <h1>Polymorphism</h1>
-    </center>
-
-    <div class="row">
-        <div class="column" id="input">
-            <center>
-                <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;border: 3px solid #000000 ;">Input</h2>
-                <form id="form1" onsubmit="return false;"><input type="text" id="inputa" name="inputa" placeholder="Space separated input">
-                <img src="images/icon.png" width="12"
-                    title="Enter a random number for calculating area of figure with Min 1 input and Max 3 space seperated inputs"><br>
-		</form>
-                <input type="button" value="Submit" id="submit">
-                <input type="button" value="Next" id="next" onclick="next()">
-                <input type="button" value="previous" id="prev" onclick="prev()">
-                <input type="button" value="Reset" id="reset">
-            </center>
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>RSA encryption decryption formulae</h2>
+          </div>
+          <div class="modal-body">
+            <p>The formulae used are as follows : </p>
+            <ul>
+                <li>formula 1</li>
+                <li>formula 2</li>
+                <li>formula 3</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <h3>Please refer to these formulae for understanding the underlying concepts.</h3>
+          </div>
         </div>
-        <div class="column col2" id="logic">
-            <center>
-                <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;border: 3px solid #000000 ;">Step by Step logic</h2>
-                <!-- <div>program</div>   -->
-                <span style="display: none;"><h3>Press Next to proceed</h3></span>
-		<img src="images/input.jpg" id="myImage" width="100%" height="90%"/>
-            </center>
+      
+      </div>
+    <div class="simulator">
+        <div id="gif">
 
         </div>
-        <div class="column col3" id="output">
-            <center>
-                <h2 style="background-color: #ccc; height:50px ; margin-top: 0px; padding-top: 7px;border: 3px solid #000000 ;">Output</h2>
-                <textarea id='outputa' name='output' placeholder="Output" rows="3" cols="20">
-
-                </textarea>
-                <!-- <div>Output</div> -->
-            </center>
-
+        <div id="pqform">
+            <label for="p">Enter P:</label>
+            <input class="option" type="text" id="p" name="p"><br><br>
+            <label for="q">Enter Q:</label>
+            <input class="option" type="text" id="q" name="q">
+            <input class="btn-next" type="submit" value="Submit" id="pqsubmit" onclick="sub()">
+        </div>
+        <div id="eform">
+            <label for="e">Choose a value for e:</label>
+            <select name="e" id="e">
+                <option value="">Select e</option>                
+            </select>
+            <input class="btn-next" type="submit" value="Submit" id="esubmit" onclick="esub()">
+        </div>
+        <div class="float" id="pqdetail">
+            P: <span id="p1"></span><br>
+            Q: <span id="q1"></span><br>
+            n: = <span id="p1q1"></span><br>            
+            &Phi;(n): = <span id="phi"></span>
+        </div>
+        <div class="float" id="edetail">
+            Public Key :  = (<span id="pbkey"></span>)
+        </div>
+        <div class="float" id="ddetail">
+            Private Key :  = (<span id="prkey"></span>)
+        </div>
+        <div id="send">
+            <label for="p">Enter Message:</label>
+            <input class="option" type="text" id="message" name="send">
+            <input class="btn-next" type="submit" value="Encrypt" id="encrypt" onclick="encrypt()">
+        </div>
+        <div class="float" id="encrypted">
+            Encrypted Data:<br>
+            <strong><span id="encmsg"></span></strong> <br>
+            <input type="submit" value="Send" id="send_message" onclick="send()">
+        </div>
+        <div class="float" id="sending">
+            Data: <strong><span id="encmsg1"></span></strong>
+        </div>
+        <div class="float" id="decrypted">                      
+            <!--Thus Decrypted Data = c^d mod n. <br>-->
+            Decrypted Data:<br>
+            <strong><span id="decmsg"></span></strong> <br>            
         </div>
     </div>
-
 </body>
-<script>    
-    document.getElementById('next').disabled= true;
-    document.getElementById('next').style.backgroundColor='grey';
-    document.getElementById('prev').disabled= true;
-    document.getElementById('prev').style.backgroundColor='grey';
-    document.getElementById('submit').onclick=function(){
-        //on submit
-        //alert("helloo");
-        document.getElementById('next').disabled=false;
-        document.getElementById('next').style.backgroundColor='#4CAF50';     
-        document.getElementById('prev').disabled=false;
-        document.getElementById('prev').style.backgroundColor='#4CAF50';
-        document.getElementById('submit').disabled=true;
-        document.getElementById('submit').style.backgroundColor='grey';
-	    setshape();
-    };
-    document.getElementById('reset').onclick=function(){
-        document.getElementById('next').disabled= true;
-        document.getElementById('next').style.backgroundColor='grey';
-        document.getElementById('prev').disabled= true;
-        document.getElementById('prev').style.backgroundColor='grey';
-        document.getElementById('submit').disabled=false;
-        document.getElementById('submit').style.backgroundColor='#4CAF50';
-        document.getElementById('form1').reset();     
-        document.getElementById('outputa').value='';
-        count=-1;
-        var image = document.getElementById('myImage');
-        image.src='images/input.jpg';
-    };
-</script>
-<script>
-var flag=-1;
-var count=-1;
-var circle=["Slide1.PNG","Slide2.jpg","Slide3.jpg","Slide6.jpg","Slide9.jpg","Slide10.jpg"];
-var rectangle=["Slide1.PNG","Slide2.jpg","Slide4.jpg","Slide7.jpg","Slide9.jpg","Slide11.jpg"];
-var triangle=["Slide1.PNG","Slide2.jpg","Slide5.jpg","Slide8.jpg","Slide9.jpg","Slide12.jpg"];
-var directory="images/";
-var area=0;
 
-function setshape(){
-	var str=document.getElementById("inputa").value;
-	var array = str.split(" ");
-	if(array.length>3 || str.trim()==""){
-		alert("Invalid Number of Parameters"); 
-        document.getElementById('reset').click();
-	}
-	else{
-		flag=array.length;
-		count=-1;
-        if (array.length==1) {
-            area=3.14*array[0]*array[0];
-            console.log(area);
-            
-        }
-        else if (array.length==2) {
-            area=array[0]*array[1];
-            console.log(area);
-        }
-        else if(array.length==3){
-            s=parseInt(array[0])+parseInt(array[1])+parseInt(array[2]);
-            s=s/2;                  
-            area=Math.sqrt(s*(s-array[0])*(s-array[1])*(s-array[2]));
-            console.log(area);
-        }
-        var image = document.getElementById('myImage');
-        image.src='images/default.jpg';
-	}
-	//console.log(area);
-    
-}
-
-function init(){
-    flag=-1;
-	count=-1;
-	}
-	
-function next(){
-	if(flag!=-1){
-		count=count+1;
-		if(count>6){
-            count-=1;
-            console.log(count);
-            
-        }
-		var image = document.getElementById('myImage');
-        if(count==6){
-            console.log(count);            
-            image.src = directory+'full_code.jpg';                        
-            document.getElementById('outputa').value=area;            
-		}
-        else{
-            if(flag==1){            
-			image.src = directory+circle[count];
-		}
-		if(flag==2){
-			image.src = directory+rectangle[count];
-		}
-		if(flag==3){
-			image.src = directory+triangle[count];
-		}
-        }        
-		
-	}
-}
-
-function prev(){
-	if(flag!=-1){
-		count=count-1;
-		if(count==-1){
-			count=0;
-		}
-		var image = document.getElementById('myImage');
-		if(flag==1){
-			image.src = directory+circle[count];
-		}
-		if(flag==2){
-			image.src = directory+rectangle[count];
-		}
-		if(flag==3){
-			image.src = directory+triangle[count];
-		}
-	}
-}
-</script>
 </html>
+<style>
+    #gif{
+        position: absolute;
+        top: 0;
+        height: fit-content;
+        width: fit-content;     
+        background: transparent;   
+        margin: 1% 12%; 
+        display: block;
+        text-align: center;       
+    }
+    .instruction {
+        border: 1px solid black;
+        padding: 0% 1% 1% 1%;
+        line-height: 1.4;
+        margin-bottom: 1px;
+    }    
+
+    .simulator {
+        border: 1px solid black;
+        padding: 1% 1% 1% 1%;
+        height: 70%;
+        position: relative;
+    }
+
+    /* The animation code */
+    @keyframes example {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    #pqform {
+        padding: 2%;
+        width: 30%;
+        float: left;
+    }
+
+    #pqdetail {
+        border: 1px solid black;
+        width: fit-content;
+        height: 80px;
+        padding: 2%;
+        display: none;
+        position: absolute;
+        bottom: 0;
+    }
+
+    @keyframes pqdetails {
+        from {
+            top: 100px;
+            right: 1%;
+            opacity: 0;
+        }
+
+        to {
+            top: 100px;
+            right: 1%;
+            opacity: 1;
+        }
+    }
+
+    #eform {
+        display: none;
+        transition: opacity 1s ease-out;
+        width: 30%;
+        
+    }
+
+    #edetail {
+        border: 1px solid black;
+        width: 200px;
+        height: fit-content;
+        padding: 2%;
+        display: none;
+        position: absolute;
+    }
+
+    @keyframes edetails {
+        from {
+            top: 10px;
+            left: 1%;
+            opacity: 0;
+        }
+
+        to {
+            top: 10px;
+            left: 1%;
+            opacity: 1;
+        }
+    }
+
+    @keyframes example2 {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    #ddetail {
+        border: 1px solid black;
+        width: fit-content;
+        height: fit-content;
+        padding: 2%;
+        display: none;
+        position: absolute;
+    }
+
+    @keyframes ddetails {
+        from {
+            top: 10px;
+            right: 1%;;
+            opacity: 0;
+        }
+
+        to {
+            top: 10px;
+            right: 1%;
+            opacity: 1;
+        }
+    }
+
+    #send {
+        display: none;
+        transition: opacity 1s ease-out;
+        width: fit-content;
+        padding: 2%;
+        position: absolute;
+        bottom: 0;
+    }
+
+    #sending {
+        display: none;
+        position: absolute;
+        bottom: 5;
+        border: 1px solid black;
+        padding: 2%;
+        width: fit-content;
+        transition: opacity 1s ease-out;        
+    }
+
+    #encrypted,#decrypted {
+        display: none;
+        width: fit-content;
+        transition: opacity 1s ease-out; 
+        position: absolute;
+        bottom: 5;    
+        height: fit-content;            
+    }
+
+    #encrypted,#decrypted {
+        border: 1px solid black;
+        padding: 2%;
+        
+    }
+    #decrypted{    
+        right: 2%;       
+    }
+    #encrypted{
+        left: 10%;
+    }
+    @keyframes send {
+        from {
+            bottom: 2%;
+            left: 0%;
+        }
+
+        to {
+            bottom: 2%;
+            left: 70%;
+        }
+    }
+
+    .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {    
+    border: 1px solid black;
+    position: fixed;
+    bottom: 50%;
+    background-color: #fefefe;
+    width: 98%;
+    left: 1%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;  
+  color: black;
+  border-bottom: 1px solid black;
+  border-radius: 2%;
+}
+
+.modal-body {padding: 2px 16px;
+    border-bottom: 1px solid black;
+  border-radius: 2%;
+}
+
+.modal-footer {
+  padding: 2px 16px;    
+  color: black;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -30; opacity: 0} 
+  to {bottom: 50%; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -30; opacity: 0}
+  to {bottom: 50%; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+</style>
+<script>
+    var f=1;
+    function change() {
+        document.getElementById('pqdetail').style.display = 'block';
+        document.getElementById('pqdetail').style.animation = 'pqdetails 4s';
+        document.getElementById('pqdetail').style.animationFillMode = 'both';
+        document.getElementById('pqdetail').style.animationTimingFunction = 'ease-in-out';
+        document.getElementById('pqdetail').addEventListener("animationend", function () { document.getElementById('eform').style.display = 'block'; document.getElementById('eform').style.animation = 'example2 1s'; });
+
+    }
+
+    function sub() {
+        document.getElementById('pqform').style.animation = 'example 2s';
+        document.getElementById('pqform').style.animationDelay = '-1s';
+        //console.log('entered');
+        pqupdate();
+        ecalc();
+        document.getElementById('pqform').addEventListener("animationend", function () { document.getElementById('pqform').style.display = 'none'; change(); });
+    }
+    function encrypt() {
+        document.getElementById('send').style.animation = 'example 2s';
+        document.getElementById('send').style.animationDelay = '-1s';
+        get_encrypt();        
+        document.getElementById('send').addEventListener("animationend", function () { document.getElementById('send').style.display = 'none'; show1(); });
+    }
+
+    function esub() {
+        document.getElementById('eform').style.animation = 'example 1s';
+        pb();
+        prkey();
+        document.getElementById('gif').innerHTML='<img src="public_key.gif" width="950px" height="400px" style="background: transparent;">';
+        document.getElementById('eform').addEventListener("animationend", function () { document.getElementById('eform').style.display = 'none'; echange(); });
+    }
+    function dchange() {
+        document.getElementById('gif').innerHTML='<img src="private_key.gif" width="950px" height="400px" style="background: transparent;">';
+        document.getElementById('ddetail').style.animationDelay = '1s';
+        document.getElementById('ddetail').style.animation = 'ddetails 4s';
+        document.getElementById('ddetail').style.animationFillMode = 'both';
+        document.getElementById('ddetail').style.animationTimingFunction = 'ease-in-out';
+        document.getElementById('ddetail').addEventListener("animationend", function () { document.getElementById('send').style.display = 'block'; });
+    }
+
+    function echange() {
+        document.getElementById('edetail').style.display = 'block';
+        document.getElementById('edetail').style.animationDelay = '1s';
+        document.getElementById('edetail').style.animation = 'edetails 4s';
+        document.getElementById('edetail').style.animationFillMode = 'both';
+        document.getElementById('edetail').style.animationTimingFunction = 'ease-in-out';
+        document.getElementById('edetail').addEventListener("animationend", function () { document.getElementById('ddetail').style.display = 'block'; dchange(); });
+
+    }
+    function show1() {
+        document.getElementById('gif').innerHTML='<img src="encryption .gif" width="950px" height="400px" style="background: transparent;">';
+        
+        document.getElementById('encrypted').style.display = 'block';
+
+    }
+    function send() {
+        document.getElementById('encrypted').style.display = 'none';
+        document.getElementById('gif').innerHTML='<img src="cipher.gif" width="950px" height="400px" style="background: transparent;">';
+        document.getElementById('sending').style.display = 'block';
+        document.getElementById('sending').style.animation = 'send 4s';
+        document.getElementById('sending').style.animationDelay = '-1s';
+        document.getElementById('sending').style.animationFillMode = 'both';
+        document.getElementById('sending').style.animationTimingFunction = 'ease-in-out';
+        document.getElementById('sending').addEventListener("animationend", function () {
+            document.getElementById('sending').style.display = 'none';
+            document.getElementById('sending').innerHTML += '<br><input type="submit" value="Decrypt" id="decrypt_message" onclick="recieve()">                ';
+            document.getElementById('sending').style.display = 'block';
+        });
+
+    }
+    function myFunction() {
+        var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+        if (f==1) {
+            document.getElementById('click').innerHTML='Click to hide formulae';
+            f=0;
+        }
+        else{
+            document.getElementById('click').innerHTML='Click to show formulae';
+            f=1;
+        }
+        
+    }
+
+</script>
+<script src="script.js"></script>
